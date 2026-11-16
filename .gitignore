@@ -1,0 +1,8 @@
+node_modules/
+.next/
+out/
+public/maplibre/
+*.tsbuildinfo
+.DS_Store
+.vercel
+.env*

@@ -1,0 +1,24 @@
+{
+  "name": "geoideas-lotes",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prebuild": "node scripts/copy-worker.mjs",
+    "predev": "node scripts/copy-worker.mjs",
+    "dev": "next dev",
+    "build": "next build && node scripts/gen-sw.mjs",
+    "start": "npx serve out -l 3000"
+  },
+  "dependencies": {
+    "maplibre-gl": "6.18.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
