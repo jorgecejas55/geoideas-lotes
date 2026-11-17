@@ -1,0 +1,49 @@
+{
+ "id": "rumipunco",
+ "nombre": "Rumi Punco – Lote 12",
+ "ubicacion": "Rumi Punco, Tucumán",
+ "cliente": "Araujo & Cía.",
+ "ha": 64.06,
+ "bbox": [
+  -65.519015,
+  -27.931239,
+  -65.509511,
+  -27.919402
+ ],
+ "fecha": "2026-11",
+ "ensayo": {
+  "dim": "120 × 300 m",
+  "ha": 3.6,
+  "orient": 22.7,
+  "centro": {
+   "lat": -27.929198,
+   "lon": -65.516356
+  },
+  "vertices": [
+   {
+    "lat": -27.930216,
+    "lon": -65.517531
+   },
+   {
+    "lat": -27.930654,
+    "lon": -65.516416
+   },
+   {
+    "lat": -27.92818,
+    "lon": -65.515182
+   },
+   {
+    "lat": -27.927742,
+    "lon": -65.516296
+   }
+  ]
+ },
+ "productos": {
+  "8c": "8 campañas (2018-19 a 2025-26)",
+  "4c": "4 campañas (2022-23 a 2025-26)"
+ },
+ "capas": [
+  "escurrimiento"
+ ],
+ "escurrimientoDefault": true
+}

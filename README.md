@@ -39,9 +39,12 @@ public/data/
     ensayo.geojson                ← polígono del ensayo
     ambientes_8c.geojson          ← polígonos con propiedad "clase" (1 bajo, 2 medio, 3 alto), "nombre", "ha", "pct"
     ambientes_4c.geojson
+    escurrimiento.geojson         ← opcional: vías de escurrimiento (se activa con "capas": ["escurrimiento"] en meta.json)
 ```
 
-Todo en WGS84 (EPSG:4326). Con más de un lote en `lotes.json` aparece un selector en el encabezado. Después de agregar datos: `npm run build` y volver a publicar (el service worker actualiza la versión solo).
+`lotes.json` también lleva `ensayo` (texto con las medidas), `contorno` y `ensayoPoly` (coordenadas para la silueta de la tarjeta). Cada lote genera su página estática en `/lote/<id>/` a partir de este listado.
+
+Todo en WGS84 (EPSG:4326). La pantalla inicial muestra una tarjeta por lote. Después de agregar datos: `npm run build` y volver a publicar (el service worker actualiza la versión solo).
 
 ## Límites de esta versión
 

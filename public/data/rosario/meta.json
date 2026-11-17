@@ -1,0 +1,49 @@
+{
+ "id": "rosario",
+ "nombre": "Rosario de la Frontera – Desarrollo 26/27",
+ "ubicacion": "Rosario de la Frontera, Salta",
+ "cliente": "Araujo & Cía.",
+ "ha": 45.84,
+ "bbox": [
+  -65.091391,
+  -25.942075,
+  -65.082488,
+  -25.931875
+ ],
+ "fecha": "2026-11",
+ "ensayo": {
+  "dim": "120 × 300 m",
+  "ha": 3.6,
+  "orient": 29.0,
+  "centro": {
+   "lat": -25.937714,
+   "lon": -65.088419
+  },
+  "vertices": [
+   {
+    "lat": -25.938617,
+    "lon": -65.089685
+   },
+   {
+    "lat": -25.939157,
+    "lon": -65.088646
+   },
+   {
+    "lat": -25.936811,
+    "lon": -65.087153
+   },
+   {
+    "lat": -25.936271,
+    "lon": -65.088191
+   }
+  ]
+ },
+ "productos": {
+  "8c": "8 campañas (2018-19 a 2025-26)",
+  "4c": "4 campañas (2022-23 a 2025-26)"
+ },
+ "capas": [
+  "escurrimiento"
+ ],
+ "escurrimientoDefault": false
+}

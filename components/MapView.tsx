@@ -21,9 +21,11 @@ export interface LoteMeta {
   bbox: [number, number, number, number];
   ensayo: { dim: string; ha: number; orient: number; centro: { lat: number; lon: number }; vertices: { lat: number; lon: number }[] };
   productos: Record<'8c' | '4c', string>;
+  capas?: string[];
+  escurrimientoDefault?: boolean;
 }
 
-const COLORS = { bajo: '#d73027', medio: '#fee05a', alto: '#1a9850', ensayo: '#00e5ff', gps: '#1a73e8' };
+const COLORS = { bajo: '#d73027', medio: '#fee05a', alto: '#1a9850', ensayo: '#00e5ff', gps: '#1a73e8', agua: '#2878e6' };
 const ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 
 const empty: FC = { type: 'FeatureCollection', features: [] };
@@ -36,6 +38,8 @@ export default function MapView({ meta }: { meta: LoteMeta }) {
   const [producto, setProducto] = useState<Producto>('8c');
   const [showEnsayo, setShowEnsayo] = useState(true);
   const [showLimite, setShowLimite] = useState(true);
+  const tieneEsc = (meta.capas || []).includes('escurrimiento');
+  const [showEsc, setShowEsc] = useState(!!meta.escurrimientoDefault);
   const [opacity, setOpacity] = useState(0.55);
   const [panel, setPanel] = useState(false);
   const [pos, setPos] = useState<{ p: LngLat; acc: number; t: number } | null>(null);
@@ -47,9 +51,9 @@ export default function MapView({ meta }: { meta: LoteMeta }) {
   // Datos del lote
   useEffect(() => {
     const base = `/data/${meta.id}/`;
-    Promise.all(['limite', 'franja30', 'ensayo', 'ambientes_8c', 'ambientes_4c'].map((n) => fetch(base + n + '.geojson').then((r) => r.json()).then((j) => [n, j] as const)))
+    Promise.all(['limite', 'franja30', 'ensayo', 'ambientes_8c', 'ambientes_4c', ...((meta.capas || []).includes('escurrimiento') ? ['escurrimiento'] : [])].map((n) => fetch(base + n + '.geojson').then((r) => r.json()).then((j) => [n, j] as const)))
       .then((pairs) => setData(Object.fromEntries(pairs)));
-  }, [meta.id]);
+  }, [meta.id, meta.capas]);
 
   useEffect(() => {
     const upd = () => setOnline(navigator.onLine);
@@ -83,7 +87,7 @@ export default function MapView({ meta }: { meta: LoteMeta }) {
     m.addControl(new maplibregl.NavigationControl({ showZoom: false, visualizePitch: false }), 'top-right');
     m.on('load', () => {
       const add = (id: string) => m.addSource(id, { type: 'geojson', data: empty });
-      ['amb8', 'amb4', 'limite', 'franja', 'ensayo', 'gps', 'gpsacc'].forEach(add);
+      ['amb8', 'amb4', 'esc', 'limite', 'franja', 'ensayo', 'gps', 'gpsacc'].forEach(add);
       const ambPaint = (src: string, id: string) => {
         m.addLayer({ id, type: 'fill', source: src, paint: {
           'fill-color': ['match', ['get', 'clase'], 1, COLORS.bajo, 2, COLORS.medio, 3, COLORS.alto, '#999'],
@@ -91,6 +95,7 @@ export default function MapView({ meta }: { meta: LoteMeta }) {
       };
       ambPaint('amb8', 'amb8-fill');
       ambPaint('amb4', 'amb4-fill');
+      m.addLayer({ id: 'esc-fill', type: 'fill', source: 'esc', paint: { 'fill-color': COLORS.agua, 'fill-opacity': 0.7 } });
       m.addLayer({ id: 'franja-line', type: 'line', source: 'franja', paint: { 'line-color': '#ffffff', 'line-width': 1.5, 'line-dasharray': [3, 2] } });
       m.addLayer({ id: 'limite-line', type: 'line', source: 'limite', paint: { 'line-color': '#ffffff', 'line-width': 2.5 } });
       m.addLayer({ id: 'ensayo-halo', type: 'line', source: 'ensayo', paint: { 'line-color': '#000000', 'line-width': 6, 'line-opacity': 0.5 } });
@@ -114,6 +119,7 @@ export default function MapView({ meta }: { meta: LoteMeta }) {
     (m.getSource('limite') as GeoJSONSource).setData(data.limite);
     (m.getSource('franja') as GeoJSONSource).setData(data.franja30);
     (m.getSource('ensayo') as GeoJSONSource).setData(data.ensayo);
+    if (data.escurrimiento) (m.getSource('esc') as GeoJSONSource).setData(data.escurrimiento);
   }, [ready, data]);
 
   // Visibilidad y opacidad
@@ -125,9 +131,10 @@ export default function MapView({ meta }: { meta: LoteMeta }) {
     vis('amb4-fill', producto === '4c');
     ['ensayo-halo', 'ensayo-line'].forEach((id) => vis(id, showEnsayo));
     ['limite-line', 'franja-line'].forEach((id) => vis(id, showLimite));
+    vis('esc-fill', tieneEsc && showEsc);
     m.setPaintProperty('amb8-fill', 'fill-opacity', opacity);
     m.setPaintProperty('amb4-fill', 'fill-opacity', opacity);
-  }, [ready, producto, showEnsayo, showLimite, opacity]);
+  }, [ready, producto, showEnsayo, showLimite, showEsc, tieneEsc, opacity]);
 
   // GPS
   const startGps = useCallback(() => {
@@ -249,6 +256,7 @@ export default function MapView({ meta }: { meta: LoteMeta }) {
           </label>
           <label className="row chk"><input type="checkbox" checked={showEnsayo} onChange={(e) => setShowEnsayo(e.target.checked)} /> <span className="sw line" style={{ background: COLORS.ensayo }} /> Ensayo recomendado</label>
           <label className="row chk"><input type="checkbox" checked={showLimite} onChange={(e) => setShowLimite(e.target.checked)} /> <span className="sw line" style={{ background: '#fff', outline: '1px solid #999' }} /> Límite del lote y franja de 30 m</label>
+          {tieneEsc && <label className="row chk"><input type="checkbox" checked={showEsc} onChange={(e) => setShowEsc(e.target.checked)} /> <span className="sw" style={{ background: COLORS.agua }} /> Vías de escurrimiento (relieve)</label>}
 
           <p className="lbl">Ensayo · {meta.ensayo.dim} · {String(meta.ensayo.ha).replace('.', ',')} ha · orientación {String(meta.ensayo.orient).replace('.', ',')}°</p>
           <table className="coords">

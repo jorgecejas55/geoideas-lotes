@@ -1,0 +1,49 @@
+{
+ "id": "embarcacion",
+ "nombre": "Embarcación – Desarrollo 26/27",
+ "ubicacion": "Embarcación, Salta",
+ "cliente": "Araujo & Cía.",
+ "ha": 19.63,
+ "bbox": [
+  -63.883936,
+  -22.972323,
+  -63.878411,
+  -22.965938
+ ],
+ "fecha": "2026-11",
+ "ensayo": {
+  "dim": "120 × 270 m",
+  "ha": 3.24,
+  "orient": 28.2,
+  "centro": {
+   "lat": -22.969226,
+   "lon": -63.880534
+  },
+  "vertices": [
+   {
+    "lat": -22.970039,
+    "lon": -63.881677
+   },
+   {
+    "lat": -22.970556,
+    "lon": -63.880648
+   },
+   {
+    "lat": -22.968413,
+    "lon": -63.879391
+   },
+   {
+    "lat": -22.967896,
+    "lon": -63.88042
+   }
+  ]
+ },
+ "productos": {
+  "8c": "8 campañas (2018-19 a 2025-26)",
+  "4c": "4 campañas (2022-23 a 2025-26)"
+ },
+ "capas": [
+  "escurrimiento"
+ ],
+ "escurrimientoDefault": false
+}
