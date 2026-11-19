@@ -59,3 +59,49 @@ html, body { margin:0; height:100%; font-family: system-ui, -apple-system, "Sego
 .pad { padding:0 16px; text-align:center; }
 .back { font-size:32px; line-height:1; color:var(--blue); text-decoration:none; padding:0 4px; }
 .ttl b { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* ---------- Escritorio: geoportal ---------- */
+.geo { position:relative; flex:1; display:grid; grid-template-columns: 360px 1fr; min-height:0; transition: grid-template-columns .25s ease; }
+.geo.collapsed { grid-template-columns: 0 1fr; }
+.side { display:flex; flex-direction:column; min-height:0; overflow:hidden; background:#f6f8fb; border-right:1px solid #dbe3ec; }
+.side-scroll { flex:1; overflow-y:auto; padding:6px 0 12px; }
+.sec { background:#fff; margin:10px 12px; padding:12px 14px; border-radius:10px; border:1px solid #e3e9f0; }
+.sec h3 { margin:0 0 4px; font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:var(--blue); }
+.sec .lbl:first-of-type { margin-top:6px; }
+.selector { width:100%; font-size:15px; font-weight:600; color:var(--blue); padding:8px 10px; border:1px solid #c9d6e2; border-radius:8px; background:#fff; margin-bottom:10px; }
+.ficha { margin:0; display:grid; gap:6px; font-size:13.5px; }
+.ficha div { display:flex; justify-content:space-between; gap:12px; border-bottom:1px dashed #e3e9f0; padding-bottom:4px; }
+.ficha dt { color:var(--muted); } .ficha dd { margin:0; text-align:right; font-weight:600; }
+.kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin:8px 0 10px; }
+.kpis div { background:#eef5fb; border-radius:8px; padding:7px 6px; text-align:center; display:flex; flex-direction:column; }
+.kpis b { font-size:13.5px; color:var(--blue); } .kpis span { font-size:11px; color:var(--muted); }
+.btns { display:flex; gap:8px; margin-top:10px; }
+.btn { flex:1; padding:8px 10px; border-radius:8px; border:1px solid var(--blue); background:var(--blue); color:#fff; font-size:13.5px; font-weight:600; cursor:pointer; }
+.btn.ghost { background:#fff; color:var(--blue); }
+.side .cta { padding:9px; font-size:14.5px; }
+.side .big { font-size:15px; }
+.side-foot { font-size:11px; color:var(--muted); padding:8px 14px; border-top:1px solid #dbe3ec; background:#fff; }
+.mapcol { position:relative; min-width:0; }
+.toggle-side { position:absolute; left:0; top:50%; transform:translateY(-50%); z-index:3; width:22px; height:56px; border:0; border-radius:0 8px 8px 0; background:#fff; color:var(--blue); font-size:20px; box-shadow:2px 0 6px rgba(0,0,0,.25); cursor:pointer; }
+.tools { position:absolute; right:10px; top:120px; z-index:3; display:flex; flex-direction:column; background:#fff; border-radius:8px; box-shadow:0 1px 5px rgba(0,0,0,.3); overflow:hidden; }
+.tool { width:40px; height:40px; border:0; border-bottom:1px solid #e3e9f0; background:#fff; color:var(--blue); display:grid; place-items:center; cursor:pointer; }
+.tool:last-child { border-bottom:0; } .tool:hover { background:#eef5fb; } .tool.on { background:var(--blue); color:#fff; }
+.tool svg { width:20px; height:20px; }
+.minileg { position:absolute; left:30px; bottom:34px; z-index:3; background:rgba(255,255,255,.95); border-radius:8px; padding:8px 12px; box-shadow:0 1px 5px rgba(0,0,0,.3); display:flex; flex-direction:column; gap:4px; font-size:13px; }
+.minileg b { color:var(--blue); font-size:12.5px; }
+.minileg span { display:flex; align-items:center; gap:7px; }
+.minileg i { width:14px; height:14px; border-radius:3px; display:inline-block; } .minileg i.ln { height:4px; width:18px; }
+.cursor { position:absolute; right:10px; bottom:30px; z-index:3; background:rgba(0,0,0,.6); color:#fff; font-size:12px; padding:3px 8px; border-radius:6px; font-variant-numeric:tabular-nums; }
+.geo .maplibregl-ctrl-scale { margin-bottom:10px !important; }
+.geo .maplibregl-ctrl-group button { width:32px; height:32px; }
+
+@media (min-width: 960px) {
+  .top { padding:8px 18px; }
+  .logo { height:38px; }
+  .ttl b { font-size:18px; }
+  /* Inicio */
+  .cards { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); max-width:1200px; padding:22px 24px; gap:16px; }
+  .lcard { padding:16px; transition: box-shadow .15s, transform .15s; }
+  .lcard:hover { box-shadow:0 4px 14px rgba(21,99,168,.22); transform:translateY(-1px); }
+  .home .pad { max-width:1200px; margin:0 auto 24px; }
+}
