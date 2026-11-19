@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"nombre":"Ensayo recomendado","dim":"120 x 300 m","ha":3.6,"orient":2.4,"idx_media":0.733,"pct_alto":57.5},"geometry":{"type":"Polygon","coordinates":[[[-65.390654,-28.104017],[-65.389436,-28.104083],[-65.389249,-28.101382],[-65.390468,-28.101316],[-65.390654,-28.104017]]]}}]}

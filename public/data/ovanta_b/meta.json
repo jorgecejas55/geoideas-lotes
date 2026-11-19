@@ -1,0 +1,49 @@
+{
+ "id": "ovanta_b",
+ "nombre": "Bañado de Ovanta – Opción B",
+ "ubicacion": "Bañado de Ovanta, Catamarca · recomendada",
+ "cliente": "Araujo & Cía.",
+ "ha": 38.36,
+ "bbox": [
+  -65.400819,
+  -28.098811,
+  -65.391812,
+  -28.094045
+ ],
+ "fecha": "2026-11",
+ "ensayo": {
+  "dim": "120 × 300 m",
+  "ha": 3.6,
+  "orient": 94.3,
+  "centro": {
+   "lat": -28.096873,
+   "lon": -65.395933
+  },
+  "vertices": [
+   {
+    "lat": -28.096205,
+    "lon": -65.397393
+   },
+   {
+    "lat": -28.097283,
+    "lon": -65.39751
+   },
+   {
+    "lat": -28.097541,
+    "lon": -65.394472
+   },
+   {
+    "lat": -28.096463,
+    "lon": -65.394356
+   }
+  ]
+ },
+ "productos": {
+  "8c": "8 campañas (2018-19 a 2025-26)",
+  "4c": "4 campañas (2022-23 a 2025-26)"
+ },
+ "capas": [
+  "escurrimiento"
+ ],
+ "escurrimientoDefault": true
+}
